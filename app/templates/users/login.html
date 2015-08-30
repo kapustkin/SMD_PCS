@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>SERK SMD - Система управления производством</title>
+</head>
+<body>
+  <h1>SERK SMD - Система управления производством</h1>
+  <h2>Вход в систему:</h2>
+  {% if form.errors %}<p class=error><strong>Для выхода нужно заполнить все поля!</strong>{% endif %}
+  {% if error == True %}<p class=error><strong>Вы неверно ввели логин или пароль! Попробуйте еще...</strong>{% endif %}
+  <form action="{{ url_for('login') }}" method=post>
+    {{ form.hidden_tag() }}
+    <dl>
+      <dt>Пользователь
+      <dd>{{ form.login }}
+      <dt>Пароль
+      <dd>{{ form.password }}
+      <p><input type="submit" name="btn" value="Войти"></p>
+    </dl>
+  </form>
+</body>
+</html>
