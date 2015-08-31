@@ -8,16 +8,17 @@ from flask import render_template, session, redirect, url_for, request
 from werkzeug import check_password_hash, generate_password_hash
 from sqlalchemy.exc import IntegrityError
 
+from flask.ext.admin import helpers
+from flask.ext.login import login_user, logout_user
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        # Todo Хранение в сессии привилегий пользователя
-        user = User.query.filter_by(login=form.login.data).first()
-        if user and check_password_hash(user.password, form.password.data):
-            session['logged_in'] = True
-            session['user'] = form.login.data
+        if helpers.validate_form_on_submit(form):
+            user = form.get_user()
+            login_user(user)
             return redirect(url_for('index'))
         else:
             return render_template('users/login.html', form=form, error=True)
@@ -28,6 +29,7 @@ def login():
 def register():
     form = RegisterForm(request.form)
     if form.validate_on_submit():
+        #TODO перенести в форму регистрации
         user = User(login=form.login.data, gen=form.gen.data, password=generate_password_hash(form.password.data))
 
         try:
@@ -37,18 +39,14 @@ def register():
             return render_template("users/register.html", form=form, error=True)
 
         # Автологин после регистрации
-        session['logged_in'] = True
-        session['user'] = user.login
-
+        login_user(user)
         return redirect(url_for('index'))
     return render_template("users/register.html", form=form)
 
 
 @app.route('/logout')
 def logout():
-    session.pop('logged_in', None)
-    session.pop('user', None)
-    print('logout')
+    logout_user()
     return redirect(url_for('login'))
 
 

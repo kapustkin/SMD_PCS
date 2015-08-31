@@ -2,13 +2,28 @@ __author__ = 'kurt'
 
 from flask_wtf import Form
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, ValidationError
-from wtforms.validators import DataRequired, Email, EqualTo
+from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
+
+from app import db
+from app.modules.users.models import User
+from werkzeug import check_password_hash, generate_password_hash
 
 
 class LoginForm(Form):
     login = StringField("login", validators=[DataRequired()])
     password = PasswordField("password", validators=[DataRequired()])
-    # submit = SubmitField("Login")
+
+    def validate_login(self, *param):
+        user = self.get_user()
+
+        if user is None:
+            raise ValidationError('Invalid user')
+
+        if not check_password_hash(user.password, self.password.data):
+            raise ValidationError('Invalid password')
+
+    def get_user(self):
+        return db.session.query(User).filter_by(login=self.login.data).first()
 
 
 class RegisterForm(Form):

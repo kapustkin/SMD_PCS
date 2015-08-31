@@ -7,11 +7,14 @@
     {% else %}
     <title>microblog</title>
     {% endif %}
+    <script type="text/javascript" language="javascript" src="{{ url_for('static', filename='js/jquery/jquery-1.11.0.min.js') }}"></script>
+    {% block scripts %}{% endblock %}
+    {% block styles %}{% endblock %}
 </head>
 <body>
-    <div>=>_<=
+    <div>TEST TEST TEST
         <p><a href="/index">Home</a></p>
-        <p>{{user.nickname}} <a href="/logout">Logout</a></p>
+        <p>{{current_user.login}} <a href="/logout">Logout</a></p>
     </div>
     <hr>
     {% block content %}{% endblock %}
