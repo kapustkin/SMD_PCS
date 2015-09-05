@@ -14,3 +14,5 @@ THREADS_PER_PAGE = 8
 
 WTF_CSRF_ENABLED = True
 WTF_CSRF_SECRET_KEY = "somethingimpossibletoguess"
+
+APP_NAME = "SERK SMD - Система управления производством"

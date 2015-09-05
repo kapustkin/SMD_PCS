@@ -14,7 +14,7 @@ from app.views import login_required
 @login_required(user.ROLE[ADMIN], user.ROLE[USER])
 def admin_users():
     user_list = User.query.order_by(User.id)
-    return render_template('admin/users/list.html', user_list=user_list, user=session['user_login'])
+    return render_template('admin/users/list.html', user_list=user_list)
 
 
 

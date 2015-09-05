@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$USER_HOME$/Документы/Python/SMD_PCS/.idea/SMD PCS.iml" filepath="$USER_HOME$/Документы/Python/SMD_PCS/.idea/SMD PCS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SMD_PCS.iml" filepath="$PROJECT_DIR$/.idea/SMD_PCS.iml" />
     </modules>
   </component>
 </project>

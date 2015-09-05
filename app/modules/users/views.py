@@ -29,7 +29,7 @@ def login():
 def register():
     form = RegisterForm(request.form)
     if form.validate_on_submit():
-        #TODO перенести в форму регистрации
+        # TODO перенести в форму регистрации
         user = User(login=form.login.data, gen=form.gen.data, password=generate_password_hash(form.password.data))
 
         try:
