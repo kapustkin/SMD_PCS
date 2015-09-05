@@ -22,7 +22,7 @@
             <thead>
                 <tr>
                     <th>№</th>
-                    <th>Фотография</th>
+                    <th>Фото</th>
                     <th>Имя пользователя</th>
                     <th>Фамилия Имя Отчество</th>
                     <th>GEN</th>
@@ -36,7 +36,11 @@
              {% for item in user_list %}
              <tr>
                  <td>{{ loop.index }}</td>
-                 <td>PHOTO</td>
+                 <td style="text-align: center">
+                     <img src="{{ url_for('static', filename='img/photo/') }}{{ item.gen }}.png"
+                          onerror="this.src='{{ url_for('static', filename='img/photo/not_found.png')}}'"
+                          style="height: 50px;" />
+                 </td>
                  <td>{{ item.login }}</td>
                  <td>{{ item.full_name }}</td>
                  <td>{{ item.gen }}</td>

@@ -14,10 +14,14 @@ from flask.ext.admin import helpers
 @role_required(role.user, role.admin)
 def admin_users():
     user_list = User.query.order_by(User.id)
+
     # Конвертирование ид роли в название
-    for user in user_list:
-        user.role = User.get_role(user)
-    return render_template('admin/users/index.html', user_list=user_list)
+    users = []
+    for item in user_list:
+        item.role = User.get_role(item)
+        users.append(item)
+
+    return render_template('admin/users/index.html', user_list=users)
 
 
 @app.route('/admin/users/<gen>', methods=['GET', 'POST'])
@@ -29,9 +33,9 @@ def admin_users_user(gen):
     form = EditForm()
     if form.validate_on_submit():
         if helpers.validate_form_on_submit(form):
-            print(123)
             return render_template('admin/users/user.html', form=form, error=True)
         else:
+            # TODO вывод ошибок валидации при редактировании в админке
             print(321)
 
     return render_template('admin/users/user.html', user=user, form=form)

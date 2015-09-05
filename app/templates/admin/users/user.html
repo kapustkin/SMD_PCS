@@ -16,7 +16,7 @@
             <div class="col-md-6">
                 <div style="margin: 0 auto; text-align: center;">
                     <h4>Фотография сотрудника</h4>
-                    <img class="img-thumbnail" src="#"/>
+                    <img class="img-thumbnail" src="{{ url_for('static', filename='img/photo/') }}{{ user.gen }}.png" style="height: 200px"/>
                 </div>
             </div>
 
@@ -33,7 +33,7 @@
                     <form method="post">
                     <tr>
                         <td>Gen сотрудника</td>
-                        <td>{{user.gen}}</td>
+                        <td>{{ form.gen(value= user.gen, readonly=true ) }}</td>
                     </tr>
                     <tr>
                         <td>Учетная запись</td>
