@@ -1,21 +1,23 @@
 __author__ = 'kurt'
 
-# User role
-ADMIN = 0
-STAFF = 1
-USER = 2
-ROLE = {
-      ADMIN: 'admin',
-      STAFF: 'staff',
-      USER: 'user',
-}
 
-# user status
-INACTIVE = 0
-NEW = 1
-ACTIVE = 2
-STATUS = {
-      INACTIVE: 'inactive',
-      NEW: 'new',
-      ACTIVE: 'active',
-}
+class role:
+    admin = 0
+    engineer = 10
+    supervisor = 20
+    operator = 30
+    user = 2
+
+
+    role_names = {
+      admin: 'admin',
+      operator: 'operator',
+      engineer: 'engineer',
+      supervisor: 'supervisor',
+      user: 'user',
+    }
+
+    def get_role(self, role):
+        return self.role_names[role]
+
+

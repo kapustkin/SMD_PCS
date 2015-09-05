@@ -8,18 +8,18 @@ from flask.ext.login import current_user, current_app
 from functools import wraps
 
 from app.modules.users import constants as user
-from app.modules.users.constants import USER
+from app.modules.users.constants import role
 
 
-def login_required(*roles):
+def role_required(*roles):
     def wrapper(fn):
         @wraps(fn)
         def decorated_view(*args, **kwargs):
             if not current_user.is_authenticated():
                 return current_app.login_manager.unauthorized()
 
-            urole = current_user.get_role()
-            print(roles, urole)
+            urole = current_user.user_role
+            # print(roles, urole)
             if urole not in roles:
                 return current_app.login_manager.unauthorized()
             return fn(*args, **kwargs)
@@ -29,7 +29,7 @@ def login_required(*roles):
 
 @app.route('/')
 @app.route('/index')
-@login_required(user.ROLE[USER])
+@role_required(role.user)
 def index():
     return render_template("index.html", title='Home')
 

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{%  block scripts %}
+    <script type="text/javascript" language="javascript" src="{{ url_for('static', filename='js/dataTables/jquery.dataTables.min.js') }}"></script>
+    <script>
+    $(document).ready(function() {
+        $('#tbl_Data').DataTable();
+    });
+    </script>
+{% endblock %}
+
+{%  block styles %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dataTables/jquery.dataTables.css') }}" >
+{% endblock %}
+
+{% block content %}
+
+
+    <div id="content">
+        <h1 style="text-align: center;">Админка SMD Attendance & Line Control System 0.1 BETA</h1>
+        <table id="tbl_Data" class="display">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Фотография</th>
+                    <th>Имя пользователя</th>
+                    <th>Фамилия Имя Отчество</th>
+                    <th>GEN</th>
+                    <th>Роль</th>
+                    <th>Действие</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+             {% for item in user_list %}
+             <tr>
+                 <td>{{ loop.index }}</td>
+                 <td>PHOTO</td>
+                 <td>{{ item.login }}</td>
+                 <td>{{ item.full_name }}</td>
+                 <td>{{ item.gen }}</td>
+                 <td>{{ item.role }}</td>
+                 <td width="100px">
+                     <a class="edit" href="{{item.gen}}">Изменить</a>
+                 </td>
+             </tr>
+             {% endfor %}
+             </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}

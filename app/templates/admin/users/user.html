@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{%  block scripts %}
+{% endblock %}
+
+{%  block styles %}
+{% endblock %}
+
+{% block content %}
+
+
+    <div id="content">
+        <h1 style="text-align: center;">Администринование / Редактирование пользователя</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div style="margin: 0 auto; text-align: center;">
+                    <h4>Фотография сотрудника</h4>
+                    <img class="img-thumbnail" src="#"/>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                  <div class="table-responsive">
+                    <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Данные</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <form method="post">
+                    <tr>
+                        <td>Gen сотрудника</td>
+                        <td>{{user.gen}}</td>
+                    </tr>
+                    <tr>
+                        <td>Учетная запись</td>
+                        <td>{{ form.login(value= user.login ) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Фамилия Имя Отчество</td>
+                        <td>{{ form.full_name(value= user.full_name ) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Роль</td>
+                        <td>{{user.role}}</td>
+                    </tr>
+
+                    <tr>
+
+                            <td>
+                                Действие
+                            </td>
+                            <td>
+                                <button class="btn btn-lg btn-primary" type="submit" style="padding: 4px; padding-left: 10px; padding-right: 10px;">
+                                    Сохранить
+                                </button>
+                            </td>
+
+                    </tr>
+                    </form>
+                    </tbody>
+                    </table>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
