@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{%  block scripts %}
+    <script type="text/javascript" language="javascript" src="{{ url_for('static', filename='js/dataTables/jquery.dataTables.min.js') }}"></script>
+    <script>
+    $(document).ready(function() {
+        $('#tbl_Data').DataTable();
+    });
+    </script>
+{% endblock %}
+
+{%  block styles %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dataTables/jquery.dataTables.css') }}" >
+{% endblock %}
+
+{% block content %}
+
+
+    <div id="content">
+        <div class="page-header">Настройки / Конфигурация линий</div>
+
+        <table id="tbl_Data" class="display">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Название</th>
+                    <th>Тип линии</th>
+                    <th>Еще</th>
+                    <th>Еще</th>
+                    <th>Еще</th>
+                    <th>Еще</th>
+                    <th>Действие</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+             {% for item in user_list %}
+             <tr>
+                 <td>{{ loop.index }}</td>
+                 <td>{{ item.login }}</td>
+                 <td>{{ item.full_name }}</td>
+                 <td>{{ item.gen }}</td>
+                 <td>{{ item.role }}</td>
+                 <td>{{ item.user_status }}</td>
+                 <td width="100px">
+                     <a class="edit" href="{{item.gen}}">Изменить</a>
+                 </td>
+             </tr>
+             {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}

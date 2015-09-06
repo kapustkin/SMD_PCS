@@ -12,6 +12,7 @@ class User(db.Model, UserMixin):
         login = db.Column(db.String(50), unique=True)
         password = db.Column(db.String(200))
         full_name = db.Column(db.String(200))
+        # TODO переименовать в user
         user_role = db.Column(db.SmallInteger, default=role.user)
         job = db.Column(db.String(200))
         email = db.Column(db.String(200))

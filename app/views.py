@@ -44,3 +44,10 @@ def index():
     return render_template("index.html")
 
 
+@app.route('/help/about')
+@role_required()
+def help_about():
+    return render_template("help/about.html")
+
+
+

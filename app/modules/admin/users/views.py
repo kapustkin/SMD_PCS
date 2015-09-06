@@ -3,7 +3,7 @@ __author__ = 'kurt'
 from app import app
 from app.modules.users.models import User
 from app.modules.users.constants import role
-from app.modules.admin.user.forms import EditForm
+from app.modules.admin.users.forms import EditForm
 
 from flask import render_template, session, redirect, url_for, request
 
@@ -17,14 +17,14 @@ from flask.ext.admin import helpers
 def admin_users():
     user_list = User.query.order_by(User.id)
 
-    # Конвертирование ид роли в название
+    # Конвертирование ид роли и статуса в название
     users = []
     for item in user_list:
         item.role = User.get_role(item)
         item.user_status = User.get_status(item)
         users.append(item)
 
-    return render_template('admin/users/index.html', user_list=users)
+    return render_template('admin/users/list.html', user_list=users)
 
 
 @app.route('/admin/users/<gen>', methods=['GET', 'POST'])

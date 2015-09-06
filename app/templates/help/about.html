@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{%  block scripts %}
+    <script type="text/javascript" language="javascript" src="{{ url_for('static', filename='js/dataTables/jquery.dataTables.min.js') }}"></script>
+    <script>
+    $(document).ready(function() {
+        $('#tbl_Data').DataTable();
+    });
+    </script>
+{% endblock %}
+
+{%  block styles %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dataTables/jquery.dataTables.css') }}" >
+{% endblock %}
+
+{% block content %}
+
+
+    <div id="content">
+        <div class="page-header">Помощь / О программе</div>
+
+        123 321
+    </div>
+
+
+{% endblock %}

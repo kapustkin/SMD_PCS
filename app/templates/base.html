@@ -31,35 +31,30 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Производство <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="/Production/LineStatus">Модели на линиях</a></li>
-                <li><a href="/Production/ModelChange">Смена модели</a></li>
+                <li><a href="#">Модели на линиях</a></li>
+                <li><a href="#">Смена модели</a></li>
               </ul>
             </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Материал <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="http://smd/Production/Main_Line/">Добавить новый материал</a></li>
-                <li><a href="http://smd/Production/Main_Line/History.aspx">Приемка материала на склад</a></li>
-                <li><a href="http://smd/Production/Main_Line/History.aspx">Выдача материала на линию</a></li>
-                <li><a href="http://smd/Production/Main_Line/History.aspx">Материал на линии</a></li>
-                <li><a href="http://smd/Production/Main_Line/History.aspx">Материал на складе</a></li>
+                <li><a href="{{ url_for('material_list') }}">Управление материалом</a></li>
               </ul>
             </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">План <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="/Attendance/Office">Офисные сотрудники</a></li>
-                <li><a href="/Attendance/Shift">Сменные сотрудники</a></li>
+                <li><a href="#">Управление планом</a></li>
               </ul>
             </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Настройки <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="{{ url_for('admin_users') }}">Управление пользователями</a></li>
-                <li><a href="/admin/lines/">Конфигурация линий</a></li>
+                <li><a href="{{ url_for('admin_users') }}">Пользователи</a></li>
+                <li><a href="{{ url_for('admin_lines') }}">Конфигурация линий</a></li>
               </ul>
             </li>
-            <li><a href="/About">Помощь</a></li>
+            <li><a href="{{ url_for('help_about') }}">Помощь</a></li>
           </ul>
         </div><!--/.nav-collapse -->
         </div>
@@ -71,7 +66,7 @@
                 <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Пользователь: {{ current_user.login }} <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="/user/info">Подробности</a></li>
+                    <li><a href="#">Информация</a></li>
                     <li><a href="{{ url_for('logout') }}">Выход</a></li>
                   </ul>
                 </li>

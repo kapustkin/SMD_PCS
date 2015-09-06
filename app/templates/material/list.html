@@ -17,18 +17,18 @@
 
 
     <div id="content">
-        <div class="page-header">Настройки / Управление пользователями</div>
+        <div class="page-header">Материал / Управление материалом</div>
 
         <table id="tbl_Data" class="display">
             <thead>
                 <tr>
                     <th>№</th>
-                    <th>Фото</th>
-                    <th>Учетная запись</th>
-                    <th>Фамилия Имя Отчество</th>
-                    <th>GEN</th>
-                    <th>Роль</th>
-                    <th>Статус</th>
+                    <th>Парт-номер</th>
+                    <th>Количество</th>
+                    <th>Шаг</th>
+                    <th>Тип материала</th>
+                    <th>Что-то</th>
+                    <th>Стоимость</th>
                     <th>Действие</th>
 
                 </tr>
@@ -38,11 +38,6 @@
              {% for item in user_list %}
              <tr>
                  <td>{{ loop.index }}</td>
-                 <td style="text-align: center">
-                     <img src="{{ url_for('static', filename='img/photo/') }}{{ item.gen }}.png"
-                          onerror="this.src='{{ url_for('static', filename='img/photo/not_found.png')}}'"
-                          style="height: 50px;" />
-                 </td>
                  <td>{{ item.login }}</td>
                  <td>{{ item.full_name }}</td>
                  <td>{{ item.gen }}</td>
@@ -53,7 +48,7 @@
                  </td>
              </tr>
              {% endfor %}
-             </tbody>
+            </tbody>
         </table>
     </div>
 
