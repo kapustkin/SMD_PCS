@@ -17,16 +17,18 @@
 
 
     <div id="content">
-        <h1 style="text-align: center;">Админка SMD Attendance & Line Control System 0.1 BETA</h1>
+        <div class="page-header">Настройки / Управление пользователями</div>
+
         <table id="tbl_Data" class="display">
             <thead>
                 <tr>
                     <th>№</th>
                     <th>Фото</th>
-                    <th>Имя пользователя</th>
+                    <th>Учетная запись</th>
                     <th>Фамилия Имя Отчество</th>
                     <th>GEN</th>
                     <th>Роль</th>
+                    <th>Статус</th>
                     <th>Действие</th>
 
                 </tr>
@@ -45,6 +47,7 @@
                  <td>{{ item.full_name }}</td>
                  <td>{{ item.gen }}</td>
                  <td>{{ item.role }}</td>
+                 <td>{{ item.user_status }}</td>
                  <td width="100px">
                      <a class="edit" href="{{item.gen}}">Изменить</a>
                  </td>

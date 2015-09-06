@@ -1,7 +1,7 @@
 __author__ = 'kurt'
 
 from app import db
-from app.modules.users.constants import role
+from app.modules.users.constants import role, status
 from flask.ext.login import UserMixin
 
 
@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
         invite_date = db.Column(db.Date())
         last_login = db.Column(db.Date())
         ip = db.Column(db.String(200))
-        status = db.Column(db.SmallInteger)
+        status = db.Column(db.SmallInteger, default=status.new)
 
         def __init__(self, login=None, gen=None, password=None):
             self.login = login
@@ -33,8 +33,12 @@ class User(db.Model, UserMixin):
             rl = role()
             return rl.get_role(self.user_role)
 
+        def get_status(self):
+            st = status()
+            return st.get_status(self.status)
+
         def is_authenticated(self):
             return True
 
         def __repr__(self):
-            return '<User %s : %s, %s>' % (self.login, self.gen, self.user_role)
+            return '<User %s : %s, %s>' % (self.login, self.gen, self.get_role(self.user_role))
