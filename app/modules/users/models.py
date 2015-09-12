@@ -3,6 +3,7 @@ __author__ = 'kurt'
 from app import db
 from app.modules.users.constants import role, status
 from flask.ext.login import UserMixin
+from werkzeug import generate_password_hash
 
 
 class User(db.Model, UserMixin):
@@ -22,10 +23,13 @@ class User(db.Model, UserMixin):
         ip = db.Column(db.String(200))
         status = db.Column(db.SmallInteger, default=status.new)
 
-        def __init__(self, login=None, gen=None, password=None):
+        def __init__(self, gen=None, login=None, password=None, user_role=None, status=None):
             self.login = login
             self.gen = gen
-            self.password = password
+            self.password = generate_password_hash(password)
+            self.user_role = user_role
+            self.status = status
+
 
         def get_id(self):
             return self.id

@@ -24,25 +24,24 @@
                 <tr>
                     <th>№</th>
                     <th>Парт-номер</th>
+                    <th>Производитель</th>
                     <th>Количество</th>
                     <th>Шаг</th>
                     <th>Тип материала</th>
-                    <th>Что-то</th>
-                    <th>Стоимость</th>
                     <th>Действие</th>
 
                 </tr>
             </thead>
 
             <tbody>
-             {% for item in user_list %}
+             {% for item in material_list %}
              <tr>
                  <td>{{ loop.index }}</td>
-                 <td>{{ item.login }}</td>
-                 <td>{{ item.full_name }}</td>
-                 <td>{{ item.gen }}</td>
-                 <td>{{ item.role }}</td>
-                 <td>{{ item.user_status }}</td>
+                 <td>{{ item.part }}</td>
+                 <td>{{ item.vendor }}</td>
+                 <td>{{ item.qty }}</td>
+                 <td>{{ item.pitch }}</td>
+                 <td>{{ item.type_name}}</td>
                  <td width="100px">
                      <a class="edit" href="{{item.gen}}">Изменить</a>
                  </td>
