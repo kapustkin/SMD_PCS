@@ -17,7 +17,7 @@
 
 
     <div id="content">
-        <div class="page-header">Материал / Управление материалом</div>
+        <div class="page-header">Материал / Список материала</div>
 
         <table id="tbl_Data" class="display">
             <thead>
@@ -43,7 +43,7 @@
                  <td>{{ item.pitch }}</td>
                  <td>{{ item.type_name}}</td>
                  <td width="100px">
-                     <a class="edit" href="{{item.gen}}">Изменить</a>
+                     <a class="edit" href="{{url_for('material_edit', part_name=item.part)}}">Изменить</a>
                  </td>
              </tr>
              {% endfor %}

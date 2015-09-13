@@ -24,6 +24,5 @@ class Material(db.Model):
             tp = material_type()
             return tp.get_type(self.type)
 
-
         def __repr__(self):
             return '<Material %s : %s, %s, %s, %s>' % (self.part, self.vendor, self.qty, self.pitch, self.type)

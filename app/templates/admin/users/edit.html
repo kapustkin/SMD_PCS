@@ -4,11 +4,16 @@
 {% endblock %}
 
 {%  block styles %}
+<style>
+    .btn {
+        width : 8em;
+    }
+</style>
 {% endblock %}
 
 {% macro render_field(field) %}
   {% if field.errors %}
-    <dd>{{ field()  }}
+    <dd>{{ field(**kwargs)|safe  }}
     {% for error in field.errors %}
     <dt>{{ error }}</dt>
     {% endfor %}
@@ -27,7 +32,9 @@
             <div class="col-md-4" style="text-align: center">
                 <div>
                     <h4>Фотография сотрудника</h4>
-                    <img class="img-thumbnail" src="{{ url_for('static', filename='img/photo/') }}{{ user.gen }}.png" style="height: 200px"/>
+                    <img class="img-thumbnail" src="{{ url_for('static', filename='img/photo/') }}{{ user.gen }}.png"
+                         onerror="this.src='{{ url_for('static', filename='img/photo/not_found.png')}}'"
+                         style="height: 200px"/>
                 </div>
             </div>
 
@@ -88,8 +95,12 @@
                             Действие
                         </td>
                         <td>
-                            <button class="btn btn-primary" type="button" onclick="location.href='{{ url_for('admin_users') }}'">Назад</button>
-                            <button class="btn btn-warning" type="submit">Сохранить</button>
+                            <button class="btn btn-primary" type="button" onclick="location.href='{{ url_for('admin_users_list') }}'">Назад</button>
+                            <button class="btn btn-success" type="submit">Сохранить</button>
+                            <button class="btn btn-warning" style="position: absolute;right: 1.6em;" type="button"
+                                    onclick="location.href='{{ url_for('admin_users_delete', gen=user.gen) }}'">
+                                Удалить
+                            </button>
                         </td>
                     </tr>
                     </form>

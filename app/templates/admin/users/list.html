@@ -17,7 +17,7 @@
 
 
     <div id="content">
-        <div class="page-header">Настройки / Пользователи</div>
+        <div class="page-header">Настройки / Список пользователей</div>
 
         <table id="tbl_Data" class="display">
             <thead>
@@ -49,7 +49,7 @@
                  <td>{{ item.role }}</td>
                  <td>{{ item.user_status }}</td>
                  <td width="100px">
-                     <a class="edit" href="{{item.gen}}">Изменить</a>
+                     <a class="edit" href="{{url_for('admin_users_edit', gen=item.gen)}}">Изменить</a>
                  </td>
              </tr>
              {% endfor %}

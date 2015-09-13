@@ -9,12 +9,11 @@ from flask import render_template, session, redirect, url_for, request
 
 from app.views import role_required
 from config import _basedir as dir
-from flask.ext.admin import helpers
 
 
-@app.route('/admin/users/')
+@app.route('/admin/users/list')
 @role_required(role.admin)
-def admin_users():
+def admin_users_list():
     user_list = User.query.order_by(User.id)
 
     # Конвертирование ид роли и статуса в название
@@ -29,7 +28,7 @@ def admin_users():
 
 @app.route('/admin/users/<gen>', methods=['GET', 'POST'])
 @role_required(role.admin)
-def admin_users_user(gen):
+def admin_users_edit(gen):
     user = User.query.filter_by(gen=gen).first()
     user.role = User.get_role(user)
     user.user_status = User.get_status(user)
@@ -51,9 +50,20 @@ def admin_users_user(gen):
         if form.photo.data:
             form.photo.data.save(dir + '/app/static/img/photo/%s.png' % user.gen)
         form.save_user()
-        return redirect(url_for("admin_users"))
+        return redirect(url_for("admin_users_list"))
 
-    return render_template('admin/users/user.html', user=user, form=form)
+    return render_template('admin/users/edit.html', user=user, form=form)
 
 
+@app.route('/admin/users/delete/<gen>')
+@role_required(role.admin)
+def admin_users_delete(gen):
+    # TODO Добавить удаление пользователя
+    return gen
 
+
+@app.route('/admin/users/add/', methods=['GET', 'POST'])
+@role_required(role.admin)
+def admin_users_add():
+    # TODO Добавить добавление пользователя
+    return 'Add user'

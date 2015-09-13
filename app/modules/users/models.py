@@ -8,7 +8,7 @@ from werkzeug import generate_password_hash
 
 class User(db.Model, UserMixin):
         __tablename__ = 'tbl_users_list'
-        id = db.Column(db.Integer, primary_key=True)
+        id = db.Column(db.Integer, primary_key=True, autoincrement='ignore_fk')
         gen = db.Column(db.String(12), unique=True)
         login = db.Column(db.String(50), unique=True)
         password = db.Column(db.String(200))
@@ -23,13 +23,13 @@ class User(db.Model, UserMixin):
         ip = db.Column(db.String(200))
         status = db.Column(db.SmallInteger, default=status.new)
 
+        # TODO сделать нормальный инит для создания пользовтателя
         def __init__(self, gen=None, login=None, password=None, user_role=None, status=None):
             self.login = login
             self.gen = gen
             self.password = generate_password_hash(password)
             self.user_role = user_role
             self.status = status
-
 
         def get_id(self):
             return self.id

@@ -24,10 +24,6 @@ class EditForm(Form):
     photo = FileField('photo', validators=[FileAllowed(['png'], 'Accept only png images!')])
     reset_pw = BooleanField("reset_pw")
 
-    # TODO добавить сброс пароля
-
-    #password = PasswordField("password", validators=[DataRequired()])
-
     def validate_login(self, *param):
         if self.login.data is 'None':
             raise ValidationError('Invalid user')

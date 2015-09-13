@@ -19,11 +19,12 @@ def create_admin_user():
 
 def create_material():
     session = db.session()
-    material_roll = Material('2007-001234', 'GMT', 1000, 2, type.roll)
-    material_pal = Material('3801-001234', 'FCK', 72, 0, type.pallete)
-    session.add(material_roll)
-    session.add(material_pal)
-    session.commit()
+    for tst in range(100):
+        material_roll = Material('2007-000%s' % tst, 'GMT', 1000, 2, type.roll)
+        material_pal = Material('3801-000%s' % tst, 'FCK', 72, 0, type.pallete)
+        session.add(material_roll)
+        session.add(material_pal)
+        session.commit()
 
 # Создание базы
 db.create_all()
