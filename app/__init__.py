@@ -32,5 +32,4 @@ def make_session_permanent():
 from app import views
 from app.modules.users import views
 from app.modules.admin.users import views
-from app.modules.admin.lines import views
 from app.modules.material import views

@@ -20,7 +20,22 @@ class EditForm(Form):
                         validators=[DataRequired(), ])
     type = SelectField("type", choices=[(str(f), material_type.get_type(material_type, f)) for f in material_type.type_names],
                        validators=[DataRequired()])
-    photo = FileField('photo', validators=[FileAllowed(['png'], 'Accept only png images!')])
+    photo = FileField('photo', validators=[FileAllowed(['png'], 'Поддерживаются только изображения в формате png!')])
+
+    def validate_part(self, field):
+        if len(field.data) != 11:
+            raise ValidationError('Введите парт-номер в формате 1234-123456')
+        else:
+            if field.data[4] != '-':
+                raise ValidationError('Введите парт-номер в формате 1234-123456')
+            else:
+                session = db.session()
+                part = session.query(Material).filter_by(part=field.data).first()
+                session.close()
+                print(part)
+                if part:
+                    raise ValidationError('Материал %s уже существует в системе!' % field.data)
+                    return
 
     def validate_pitch(self, field):
         if field.data not in ('0', '2', '4', '8', '16', '24', '32'):
@@ -38,4 +53,14 @@ class EditForm(Form):
         part.pitch = self.pitch.data
         part.type = self.type.data
         session.commit()
-        print('save ok')
+        print('save part ok')
+
+    def add_part(self):
+        session = db.session()
+        prt = Material(self.part.data, self.vendor.data, self.qty.data, self.pitch.data, self.type.data)
+        session.add(prt)
+        session.commit()
+        session.close()
+        print('add part ok')
+
+

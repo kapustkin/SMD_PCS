@@ -66,5 +66,13 @@ def material_edit(part_name):
 @app.route('/material/add/', methods=['GET', 'POST'])
 @role_required()
 def material_add():
-    # TODO Добавить добавление материала
-    return 'material_add'
+    form = EditForm()
+    if form.validate_on_submit():
+        print("valid")
+        if form.photo.data:
+            form.photo.data.save(dir + '/app/static/img/material/%s_%s.png' % (form.photo.part, form.vendor.data))
+        form.add_part()
+        return redirect(url_for("material_list"))
+    else:
+        print(form.errors)
+    return render_template('material/add.html', form=form)

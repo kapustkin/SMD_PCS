@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{%  block scripts %}
+{% endblock %}
+
+{%  block styles %}
+<style>
+    .btn {
+        width : 8em;
+    }
+</style>
+{% endblock %}
+
+{% macro render_field(field) %}
+  {% if field.errors %}
+    <dd>{{ field(**kwargs)|safe   }}
+    {% for error in field.errors %}
+    <dt>{{ error }}</dt>
+    {% endfor %}
+  {% else %}
+    <dd>{{ field(**kwargs)|safe  }}
+  {% endif %}
+  </dd>
+{% endmacro %}
+
+{% block content %}
+    <div id="content">
+
+        <div class="page-header">Материал / Управление материалом / Добавление нового материала </div>
+
+        <div class="row">
+            <div class="col-md-4" style="text-align: center">
+                <div>
+                    <h4>Фотография материала</h4>
+                    <img class="img-thumbnail" src="{{ url_for('static', filename='img/material/no_image.png')}}"
+                         style="height: 200px"/>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                  <div class="table-responsive">
+                    <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Данные</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <form method="post" enctype="multipart/form-data">
+                        {{ form.csrf_token }}
+                    <tr>
+                        <td>Парт-номер</td>
+                        <td>{{ render_field(form.part, class="form-control") }}</td>
+                    </tr>
+                    <tr>
+                        <td>Производитель</td>
+                        <td>{{ render_field(form.vendor, class="form-control") }}</td>
+                    </tr>
+                    <tr>
+                        <td>Количество</td>
+                        <td>{{ render_field(form.qty, class="form-control") }}</td>
+                    </tr>
+                    <tr>
+                        <td>Шаг</td>
+                        <td>{{ render_field(form.pitch, class="form-control") }}</td>
+                    </tr>
+                    <tr>
+                        <td>Тип материала</td>
+                        <td>{{ render_field(form.type, class="form-control") }}</td>
+                    </tr>
+                    <tr>
+                        <td>Фотография</td>
+                        <td>{{ render_field(form.photo, class="")}} </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Действие
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" type="button" onclick="location.href='{{ url_for('material_list') }}'">Назад</button>
+                            <button class="btn btn-success" type="submit" style="position: absolute;right: 1.6em;" type="button">
+                            Сохранить</button>
+                        </td>
+                    </tr>
+                    </form>
+                    </tbody>
+                    </table>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
